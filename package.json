@@ -1,0 +1,8 @@
+{
+  "name": "@viero/common",
+  "version": "1.0.0",
+  "description": "This library contains common code used by @viero libraries.",
+  "author": "Zoltan Gobolos <zoltan.gobolos@viero.tv>",
+  "license": "ISC",
+  "dependencies": {}
+}
