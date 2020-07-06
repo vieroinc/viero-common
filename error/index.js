@@ -14,15 +14,15 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-'use-strict'
+'use-strict';
 
 export class VieroError extends Error {
 
-  constructor(domain, code, error) {
-    super(`Viero error, '${domain}', '${code}'${error ? `, '${error}'` : ''}`);
+  constructor(domain, code, userData) {
+    super(`VieroError ${domain}:${code}`);
     this._domain = domain;
     this._code = code;
-    this._error = error;
+    this._userData = userData || {};
   }
 
   get domain() {
@@ -33,8 +33,18 @@ export class VieroError extends Error {
     return this._code;
   }
 
-  get error() {
-    return this._error;
+  get userData() {
+    return this._userData;
+  }
+
+  get(key) {
+    return this.userData[key];
   }
 
 }
+
+VieroError.KEY = {
+  ERROR: 'VieroErrorKeyError',
+  MESSAGE: 'VieroErrorKeyMessage',
+  RESOLUTION: 'VieroErrorKeyResolution',
+};
