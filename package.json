@@ -1,7 +1,7 @@
 {
   "name": "@viero/common",
-  "version": "1.4.2",
-  "description": "Common code used by other viero libraries.",
+  "version": "1.4.3",
+  "description": "Common code used by other @vieroinc libraries.",
   "homepage": "https://github.com/vieroinc/viero-common",
   "contributors": [
     {
@@ -15,10 +15,10 @@
     "url": "https://github.com/vieroinc/viero-common.git"
   },
   "scripts": {
-    "reset": "rm -rf error log uid node_modules",
     "clean": "rm -rf error log uid",
+    "reset": "rm -rf error log uid node_modules",
     "babel": "babel src -d . --source-maps inline",
-    "prepublishOnly": "babel src -d ."
+    "prepublishOnly": "babel src -d . --source-maps inline"
   },
   "babel": {
     "presets": [

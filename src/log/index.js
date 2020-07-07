@@ -72,7 +72,7 @@ export class VieroLog {
         return _level = VieroLog.LEVEL.ERROR | VieroLog.LEVEL.WARNING | VieroLog.LEVEL.INFO | VieroLog.LEVEL.DEBUG | VieroLog.LEVEL.TRACE;
       }
     }
-    throw new VieroError('VieroLog', 118653);
+    throw new VieroError('/log', 118653);
   }
 
   static get level() {

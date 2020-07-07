@@ -1,3 +1,3 @@
 # @viero/common
 
-Common code used by other viero libraries.
+Common code used by other @vieroinc libraries.
