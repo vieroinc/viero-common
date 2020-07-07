@@ -14,12 +14,12 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-'use-strict'
-
-import { VieroError } from '../error';
+import { VieroError } from '../error/index.js';
 
 let _backend;
 let _level;
+
+const time = () => new Date().toISOString().slice(11, -1);
 
 class VieroConsoleLog {
 
@@ -79,58 +79,86 @@ export class VieroLog {
     return _level;
   }
 
+  static isTrace() {
+    return _level & VieroLog.LEVEL.TRACE;
+  }
+
+  static isDebug() {
+    return _level & VieroLog.LEVEL.DEBUG;
+  }
+
+  static isInfo() {
+    return _level & VieroLog.LEVEL.INFO;
+  }
+
+  static isWarning() {
+    return _level & VieroLog.LEVEL.WARNING;
+  }
+
+  static isError() {
+    return _level & VieroLog.LEVEL.ERROR;
+  }
+
+  static isNone() {
+    return _level & VieroLog.LEVEL.NONE;
+  }
+
   constructor(domain, backend) {
     this._domain = domain;
     this._backend = backend || _backend || new VieroConsoleLog();
   }
 
   isTrace() {
-    return _level & VieroLog.LEVEL.TRACE;
+    return VieroLog.isTrace();
+  }
+
+  isDebug() {
+    return VieroLog.isDebug();
+  }
+
+  isInfo() {
+    return VieroLog.isInfo();
+  }
+
+  isWarning() {
+    return VieroLog.isWarning();
+  }
+
+  isError() {
+    return VieroLog.isError();
+  }
+
+  isNone() {
+    return VieroLog.isNone();
   }
 
   trace(...args) {
     if (this.isTrace()) {
-      this._backend.trace(this._domain, new Date(), ...args);
+      this._backend.trace(this._domain, time(), ...args);
     }
-  }
-
-  isDebug() {
-    return _level & VieroLog.LEVEL.DEBUG;
   }
 
   debug(...args) {
     if (this.isDebug()) {
-      this._backend.debug(this._domain, new Date(), ...args);
+      this._backend.debug(this._domain, time(), ...args);
     }
-  }
-
-  isInfo() {
-    return _level & VieroLog.LEVEL.INFO;
   }
 
   info(...args) {
     if (this.isInfo()) {
-      this._backend.info(this._domain, new Date(), ...args);
+      this._backend.info(this._domain, time(), ...args);
     }
-  }
-
-  isWarning() {
-    return _level & VieroLog.LEVEL.WARNING;
   }
 
   warning(...args) {
     if (this.isWarning()) {
-      this._backend.warning(this._domain, new Date(), ...args);
+      this._backend.warning(this._domain, time(), ...args);
     }
-  }
-
-  isError() {
-    return _level & VieroLog.LEVEL.ERROR;
   }
 
   error(...args) {
     if (this.isError()) {
-      this._backend.error(this._domain, new Date(), ...args);
+      this._backend.error(this._domain, time(), ...args);
     }
   }
 

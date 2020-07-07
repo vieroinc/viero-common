@@ -14,8 +14,6 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-'use-strict';
-
 export class VieroError extends Error {
 
   constructor(domain, code, userData) {

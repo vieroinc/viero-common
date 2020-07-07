@@ -14,8 +14,6 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-'use-strict'
-
 import { v4 } from 'uuid';
 import { generate } from 'shortid';
 
