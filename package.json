@@ -18,8 +18,7 @@
     "reset": "rm -rf error log uid node_modules",
     "clean": "rm -rf error log uid",
     "babel": "babel src -d . --source-maps inline",
-    "prepublishOnly": "babel src -d .",
-    "publish": "npm publish --access public"
+    "prepublishOnly": "babel src -d ."
   },
   "babel": {
     "presets": [
