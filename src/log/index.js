@@ -134,31 +134,31 @@ export class VieroLog {
 
   trace(...args) {
     if (this.isTrace()) {
-      this._backend.trace(this._domain, time(), ...args);
+      this._backend.trace(time(), this._domain, ...args);
     }
   }
 
   debug(...args) {
     if (this.isDebug()) {
-      this._backend.debug(this._domain, time(), ...args);
+      this._backend.debug(time(), this._domain, ...args);
     }
   }
 
   info(...args) {
     if (this.isInfo()) {
-      this._backend.info(this._domain, time(), ...args);
+      this._backend.info(time(), this._domain, ...args);
     }
   }
 
   warning(...args) {
     if (this.isWarning()) {
-      this._backend.warning(this._domain, time(), ...args);
+      this._backend.warning(time(), this._domain, ...args);
     }
   }
 
   error(...args) {
     if (this.isError()) {
-      this._backend.error(this._domain, time(), ...args);
+      this._backend.error(time(), this._domain, ...args);
     }
   }
 
