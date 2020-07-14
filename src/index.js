@@ -15,17 +15,12 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-import { v4 } from 'uuid';
-import { generate } from 'shortid';
+import { VieroError } from "./error";
+import { VieroLog } from "./log";
+import { VieroUID } from "./uid";
 
-export class VieroUID {
-
-  static uuid() {
-    return v4();
-  }
-
-  static short() {
-    return generate();
-  }
-
-}
+export {
+  VieroError,
+  VieroLog,
+  VieroUID,
+};

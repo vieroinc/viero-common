@@ -1,3 +1,4 @@
+'use-strict';
 /**
  * Copyright 2020 Viero, Inc.
  *
