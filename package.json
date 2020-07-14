@@ -1,6 +1,6 @@
 {
   "name": "@viero/common",
-  "version": "1.4.7",
+  "version": "1.4.14",
   "description": "Common code used by other @vieroinc libraries.",
   "homepage": "https://github.com/vieroinc/viero-common",
   "contributors": [
@@ -22,6 +22,7 @@
   },
   "main": "./index.js",
   "module": "./index.js",
+  "types": "./index.d.ts",
   "dependencies": {
     "shortid": "^2.2.15",
     "uuid": "^8.1.0"
