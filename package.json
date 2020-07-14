@@ -1,6 +1,6 @@
 {
   "name": "@viero/common",
-  "version": "1.4.14",
+  "version": "1.4.16",
   "description": "Common code used by other @vieroinc libraries.",
   "homepage": "https://github.com/vieroinc/viero-common",
   "contributors": [
@@ -15,14 +15,13 @@
     "url": "https://github.com/vieroinc/viero-common.git"
   },
   "scripts": {
-    "clean": "rimraf error log uid index.js",
+    "clean": "rimraf dist",
     "reset": "npm run clean && rimraf node_modules",
-    "build": "babel src -d . --source-maps inline",
-    "prepublishOnly": "npm run build"
+    "build": "npm run clean && babel src -d ./dist --source-maps inline",
+    "dist": "npm run build && copyfiles package.json README.md LICENSE.md dist",
+    "npmjs": "npm publish ./dist --access public"
   },
-  "main": "./index.js",
   "module": "./index.js",
-  "types": "./index.d.ts",
   "dependencies": {
     "shortid": "^2.2.15",
     "uuid": "^8.1.0"
@@ -31,6 +30,7 @@
     "@babel/cli": "^7.10.4",
     "@babel/core": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
+    "copyfiles": "^2.3.0",
     "rimraf": "^3.0.2"
   }
 }

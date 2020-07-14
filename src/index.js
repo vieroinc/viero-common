@@ -1,4 +1,3 @@
-'use-strict';
 /**
  * Copyright 2020 Viero, Inc.
  *
@@ -15,12 +14,6 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-import { VieroError } from "./error";
-import { VieroLog } from "./log";
-import { VieroUID } from "./uid";
-
-export {
-  VieroError,
-  VieroLog,
-  VieroUID,
-};
+export { VieroError } from "./error";
+export { VieroLog } from "./log";
+export { VieroUID } from "./uid";

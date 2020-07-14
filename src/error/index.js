@@ -1,4 +1,3 @@
-'use-strict';
 /**
  * Copyright 2020 Viero, Inc.
  *
@@ -15,7 +14,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-export class VieroError extends Error {
+class VieroError extends Error {
 
   constructor(domain, code, userData) {
     super(`VieroError ${domain}:${code}`);
@@ -47,3 +46,5 @@ VieroError.KEY = {
   MESSAGE: 'VieroErrorKeyMessage',
   RESOLUTION: 'VieroErrorKeyResolution',
 };
+
+exports.VieroError = VieroError;
