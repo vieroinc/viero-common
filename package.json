@@ -1,6 +1,6 @@
 {
   "name": "@viero/common",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "description": "Common code used by other @vieroinc libraries.",
   "homepage": "https://github.com/vieroinc/viero-common",
   "contributors": [
@@ -20,16 +20,7 @@
     "build": "babel src -d . --source-maps inline",
     "prepublishOnly": "npm run build"
   },
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "modules": false
-        }
-      ]
-    ]
-  },
+  "main": "./index.js",
   "module": "./index.js",
   "dependencies": {
     "shortid": "^2.2.15",
