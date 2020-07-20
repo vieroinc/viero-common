@@ -14,8 +14,6 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-const MERGE = {};
-
 /**
  * Throttles parallel calls with the same intent by returning the response of
  * the first completed operation to each subsequent ones until the first completes.
@@ -34,6 +32,7 @@ export const merge = (intent, op) => {
   }
   return MERGE[intent];
 };
+const MERGE = {};
 
 /**
  * Not implemented!
