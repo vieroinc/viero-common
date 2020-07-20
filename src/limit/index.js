@@ -14,10 +14,41 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-import { v4 } from 'uuid';
-import { generate } from 'shortid';
+const MERGE = {};
 
-export const uuid = () => v4();
-export const longUId = uuid;
-export const shortUId = () => generate();
+/**
+ * Throttles parallel calls with the same intent by returning the response of
+ * the first completed operation to each subsequent ones until the first completes.
+ * @param {*} intent the intent of the merge. Must be unique to the use case.
+ * @param {*} op the function that MUST return with a Promise.
+ */
+export const merge = (intent, op) => {
+  if (!MERGE[intent]) {
+    MERGE[intent] = op().then((res) => {
+      delete MERGE[intent];
+      return res;
+    }).catch((err) => {
+      delete MERGE[intent];
+      throw err;
+    });
+  }
+  return MERGE[intent];
+};
 
+/**
+ * Not implemented!
+ */
+/*
+export const throttle = () => {
+  // TODO: implement
+};
+*/
+
+/**
+ * Not implemented!
+ */
+/*
+export const debounce = () => {
+  // TODO: implement
+};
+*/

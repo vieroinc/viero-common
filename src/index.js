@@ -16,4 +16,4 @@
 
 export { VieroError } from "./error";
 export { VieroLog } from "./log";
-export { VieroUID } from "./uid";
+export { uuid, longUId, shortUId } from "./uid";
