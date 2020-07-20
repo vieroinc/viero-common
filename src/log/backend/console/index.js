@@ -14,6 +14,31 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-export { VieroError } from './error';
-export { VieroLog } from './log';
-export { uuid, longUId, shortUId } from './uid';
+class VieroConsoleLog {
+  trace(...args) {
+    // eslint-disable-next-line no-console
+    console.trace(...args);
+  }
+
+  debug(...args) {
+    // eslint-disable-next-line no-console
+    console.debug(...args);
+  }
+
+  info(...args) {
+    // eslint-disable-next-line no-console
+    console.info(...args);
+  }
+
+  warning(...args) {
+    // eslint-disable-next-line no-console
+    console.warn(...args);
+  }
+
+  error(...args) {
+    // eslint-disable-next-line no-console
+    console.error(...args);
+  }
+}
+
+export { VieroConsoleLog };

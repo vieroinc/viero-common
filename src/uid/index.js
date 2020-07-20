@@ -17,7 +17,8 @@
 import { v4 } from 'uuid';
 import { generate } from 'shortid';
 
-export const uuid = () => v4();
-export const longUId = uuid;
-export const shortUId = () => generate();
+const uuid = () => v4();
+const longUId = uuid;
+const shortUId = () => generate();
 
+export { uuid, longUId, shortUId };

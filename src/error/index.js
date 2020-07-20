@@ -15,7 +15,6 @@
  */
 
 class VieroError extends Error {
-
   constructor(domain, code, userData) {
     super(`VieroError ${domain}:${code}`);
     this._domain = domain;
@@ -38,7 +37,6 @@ class VieroError extends Error {
   get(key) {
     return this.userData[key];
   }
-
 }
 
 VieroError.KEY = {
@@ -47,4 +45,4 @@ VieroError.KEY = {
   RESOLUTION: 'VieroErrorKeyResolution',
 };
 
-exports.VieroError = VieroError;
+export { VieroError };

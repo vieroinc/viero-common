@@ -14,13 +14,15 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+const MERGE = {};
+
 /**
  * Throttles parallel calls with the same intent by returning the response of
  * the first completed operation to each subsequent ones until the first completes.
  * @param {*} intent the intent of the merge. Must be unique to the use case.
  * @param {*} op the function that MUST return with a Promise.
  */
-export const merge = (intent, op) => {
+const merge = (intent, op) => {
   if (!MERGE[intent]) {
     MERGE[intent] = op().then((res) => {
       delete MERGE[intent];
@@ -32,7 +34,6 @@ export const merge = (intent, op) => {
   }
   return MERGE[intent];
 };
-const MERGE = {};
 
 /**
  * Not implemented!
@@ -51,3 +52,5 @@ export const debounce = () => {
   // TODO: implement
 };
 */
+
+export { merge };

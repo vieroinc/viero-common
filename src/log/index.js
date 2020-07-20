@@ -14,98 +14,83 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-import { VieroError } from '../error/index.js';
+import { VieroError } from '../error';
+import { VieroConsoleLog } from './backend/console';
 
-let _backend;
-let _level;
+let BACKEND;
+let LEVEL;
 
 const time = () => new Date().toISOString().slice(11, -1);
 
-class VieroConsoleLog {
-
-  trace(...args) {
-    console.trace(...args);
-  }
-
-  debug(...args) {
-    console.debug(...args);
-  }
-
-  info(...args) {
-    console.info(...args);
-  }
-
-  warning(...args) {
-    console.warn(...args);
-  }
-
-  error(...args) {
-    console.error(...args);
-  }
-
-}
-
-export class VieroLog {
-
+class VieroLog {
   static set backend(backend) {
-    _backend = backend;
+    BACKEND = backend;
   }
 
   static set level(level) {
     switch (level) {
       case VieroLog.LEVEL.NONE: {
-        return _level = VieroLog.LEVEL.NONE;
+        LEVEL = VieroLog.LEVEL.NONE;
+        return;
       }
       case VieroLog.LEVEL.ERROR: {
-        return _level = VieroLog.LEVEL.ERROR;
+        LEVEL = VieroLog.LEVEL.ERROR;
+        return;
       }
       case VieroLog.LEVEL.WARNING: {
-        return _level = VieroLog.LEVEL.ERROR | VieroLog.LEVEL.WARNING;
+        LEVEL = VieroLog.LEVEL.ERROR | VieroLog.LEVEL.WARNING;
+        return;
       }
       case VieroLog.LEVEL.INFO: {
-        return _level = VieroLog.LEVEL.ERROR | VieroLog.LEVEL.WARNING | VieroLog.LEVEL.INFO;
+        LEVEL = VieroLog.LEVEL.ERROR | VieroLog.LEVEL.WARNING | VieroLog.LEVEL.INFO;
+        return;
       }
       case VieroLog.LEVEL.DEBUG: {
-        return _level = VieroLog.LEVEL.ERROR | VieroLog.LEVEL.WARNING | VieroLog.LEVEL.INFO | VieroLog.LEVEL.DEBUG;
+        LEVEL = VieroLog.LEVEL.ERROR | VieroLog.LEVEL.WARNING | VieroLog.LEVEL.INFO | VieroLog.LEVEL.DEBUG;
+        return;
       }
       case VieroLog.LEVEL.TRACE: {
-        return _level = VieroLog.LEVEL.ERROR | VieroLog.LEVEL.WARNING | VieroLog.LEVEL.INFO | VieroLog.LEVEL.DEBUG | VieroLog.LEVEL.TRACE;
+        LEVEL = VieroLog.LEVEL.ERROR | VieroLog.LEVEL.WARNING | VieroLog.LEVEL.INFO | VieroLog.LEVEL.DEBUG
+          | VieroLog.LEVEL.TRACE;
+        return;
+      }
+      default: {
+        throw new VieroError('/log', 118653);
       }
     }
-    throw new VieroError('/log', 118653);
   }
 
   static get level() {
-    return _level;
+    return LEVEL;
   }
 
   static isTrace() {
-    return _level & VieroLog.LEVEL.TRACE;
+    return LEVEL & VieroLog.LEVEL.TRACE;
   }
 
   static isDebug() {
-    return _level & VieroLog.LEVEL.DEBUG;
+    return LEVEL & VieroLog.LEVEL.DEBUG;
   }
 
   static isInfo() {
-    return _level & VieroLog.LEVEL.INFO;
+    return LEVEL & VieroLog.LEVEL.INFO;
   }
 
   static isWarning() {
-    return _level & VieroLog.LEVEL.WARNING;
+    return LEVEL & VieroLog.LEVEL.WARNING;
   }
 
   static isError() {
-    return _level & VieroLog.LEVEL.ERROR;
+    return LEVEL & VieroLog.LEVEL.ERROR;
   }
 
   static isNone() {
-    return _level & VieroLog.LEVEL.NONE;
+    return LEVEL & VieroLog.LEVEL.NONE;
   }
 
   constructor(domain, backend) {
     this._domain = domain;
-    this._backend = backend || _backend || new VieroConsoleLog();
+    this.BACKEND = backend || BACKEND || new VieroConsoleLog();
   }
 
   isTrace() {
@@ -134,34 +119,33 @@ export class VieroLog {
 
   trace(...args) {
     if (this.isTrace()) {
-      this._backend.trace(time(), this._domain, ...args);
+      this.BACKEND.trace(time(), this._domain, ...args);
     }
   }
 
   debug(...args) {
     if (this.isDebug()) {
-      this._backend.debug(time(), this._domain, ...args);
+      this.BACKEND.debug(time(), this._domain, ...args);
     }
   }
 
   info(...args) {
     if (this.isInfo()) {
-      this._backend.info(time(), this._domain, ...args);
+      this.BACKEND.info(time(), this._domain, ...args);
     }
   }
 
   warning(...args) {
     if (this.isWarning()) {
-      this._backend.warning(time(), this._domain, ...args);
+      this.BACKEND.warning(time(), this._domain, ...args);
     }
   }
 
   error(...args) {
     if (this.isError()) {
-      this._backend.error(time(), this._domain, ...args);
+      this.BACKEND.error(time(), this._domain, ...args);
     }
   }
-
 }
 
 VieroLog.LEVEL = {
@@ -172,3 +156,5 @@ VieroLog.LEVEL = {
   DEBUG: 1 << 4,
   TRACE: 1 << 5,
 };
+
+export { VieroLog };
