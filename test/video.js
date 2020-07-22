@@ -78,9 +78,6 @@ describe('/video', () => {
     describe('(<milis>, { compress: true })', () => {
       casesWithCompress.forEach((caze) => {
         it(`if (${caze[0]}) > ${caze[1]}`, () => {
-          if (caze[0] === 61123) {
-            debugger;
-          }
           expect(humanReadableTimeCode(caze[0], { compress: true })).to.equal(caze[1]);
         });
       });
