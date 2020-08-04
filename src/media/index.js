@@ -19,6 +19,17 @@ const SECS_IN_MINUTE = 60;
 const MINUTES_IN_HOUR = 60;
 const SECS_IN_HOUR = SECS_IN_MINUTE * MINUTES_IN_HOUR;
 
+const EXT_MIME = {
+  'video/x-matroska': 'mkv',
+  'video/mp4': 'mp4',
+  'video/webm': 'webm',
+  'video/quicktime': 'mov',
+  mkv: 'video/x-matroska',
+  mp4: 'video/mp4',
+  webm: 'video/webm',
+  mov: 'video/quicktime',
+};
+
 const humanReadableTimeCode = (miliseconds, options = {}) => {
   if (!Number.isFinite(miliseconds)) {
     if (options.compress) return '-';
@@ -53,4 +64,9 @@ const parseMime = (mime) => {
   return { major: typeSplit[0], minor: typeSplit[1], codecs: codecsSplit };
 };
 
-export { humanReadableTimeCode, parseMime };
+const mime2Ext = (extOrMime) => EXT_MIME[extOrMime];
+const ext2Mime = mime2Ext;
+
+export {
+  humanReadableTimeCode, parseMime, mime2Ext, ext2Mime,
+};
