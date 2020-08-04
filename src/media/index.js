@@ -43,4 +43,14 @@ const humanReadableTimeCode = (miliseconds, options = {}) => {
   return hhmmss;
 };
 
-export { humanReadableTimeCode };
+const parseMime = (mime) => {
+  const split = mime.split(';');
+  const typeSplit = split[0].split('/');
+  if (split.length === 1) {
+    return { major: typeSplit[0], minor: typeSplit[1] };
+  }
+  const codecsSplit = split[1].slice(7).split(',');
+  return { major: typeSplit[0], minor: typeSplit[1], codecs: codecsSplit };
+};
+
+export { humanReadableTimeCode, parseMime };

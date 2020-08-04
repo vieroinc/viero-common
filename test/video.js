@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 const { describe, it } = require('mocha');
-const { humanReadableTimeCode } = require('../dist/video');
+const { humanReadableTimeCode } = require('../dist/media');
 
 const casesWithoutMilisAndCompress = [
   [undefined, '--:--:--'],
