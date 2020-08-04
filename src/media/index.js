@@ -56,12 +56,15 @@ const humanReadableTimeCode = (miliseconds, options = {}) => {
 
 const parseMime = (mime) => {
   const split = mime.split(';');
-  const typeSplit = split[0].split('/');
+  const type = split[0];
+  const typeSplit = type.split('/');
   if (split.length === 1) {
-    return { major: typeSplit[0], minor: typeSplit[1] };
+    return { major: typeSplit[0].trim(), minor: typeSplit[1].trim() };
   }
   const codecsSplit = split[1].slice(7).split(',');
-  return { major: typeSplit[0], minor: typeSplit[1], codecs: codecsSplit };
+  return {
+    type, major: typeSplit[0], minor: typeSplit[1], codecs: codecsSplit,
+  };
 };
 
 const mime2Ext = (extOrMime) => EXT_MIME[extOrMime];
