@@ -24,10 +24,14 @@ const EXT_MIME = {
   'video/mp4': 'mp4',
   'video/webm': 'webm',
   'video/quicktime': 'mov',
+  'image/jpeg': 'jpg',
+  'image/png': 'png',
   mkv: 'video/x-matroska',
   mp4: 'video/mp4',
   webm: 'video/webm',
   mov: 'video/quicktime',
+  jpg: 'image/jpeg',
+  png: 'image/png',
 };
 
 const humanReadableTimeCode = (miliseconds, options = {}) => {
@@ -59,7 +63,7 @@ const parseMime = (mime) => {
   const type = split[0];
   const typeSplit = type.split('/');
   if (split.length === 1) {
-    return { major: typeSplit[0].trim(), minor: typeSplit[1].trim() };
+    return { type, major: typeSplit[0].trim(), minor: typeSplit[1].trim() };
   }
   const codecsSplit = split[1].slice(7).split(',');
   return {
