@@ -19,20 +19,168 @@ const SECS_IN_MINUTE = 60;
 const MINUTES_IN_HOUR = 60;
 const SECS_IN_HOUR = SECS_IN_MINUTE * MINUTES_IN_HOUR;
 
-const EXT_MIME = {
-  'video/x-matroska': 'mkv',
-  'video/mp4': 'mp4',
-  'video/webm': 'webm',
-  'video/quicktime': 'mov',
-  'image/jpeg': 'jpg',
-  'image/png': 'png',
-  mkv: 'video/x-matroska',
-  mp4: 'video/mp4',
-  webm: 'video/webm',
-  mov: 'video/quicktime',
-  jpg: 'image/jpeg',
-  png: 'image/png',
+const SUPPORTED_FORMAT = {
+  VIDEO: {
+    MIME: [
+      'video/x-matroska',
+      'video/mp4',
+      'video/x-m4v',
+      'video/quicktime',
+      'video/3gpp',
+      'video/mpeg',
+      'video/mp2p',
+      'video/mp2t',
+      'video/x-msvideo',
+      'video/vnd.avi',
+      'video/divx',
+      'video/x-ms-wmv',
+      'video/webm',
+      'video/x-ms-vob',
+      'video/x-motion-jpeg',
+      'video/ogg',
+      'video/x-viero-unknown',
+    ],
+    EXT: {
+      divx: {
+        mime: 'video/divx',
+      },
+    },
+  },
+  SUBTITLE: {
+    EXT: {
+      srt: {
+        mime: 'text/plain',
+      },
+      sub: {
+        mime: 'text/plain',
+      },
+      idx: {
+        mime: 'text/plain',
+      },
+      smi: {
+        mime: 'application/smil',
+      },
+      smil: {
+        mime: 'application/smil',
+      },
+    },
+  },
+  IMAGE: {
+    MIME: {
+      'image/x-viero-unknown': {
+        ext: [],
+        transcode: false,
+      },
+      'image/jpeg': {
+        ext: ['jpg', 'jpeg'],
+        transcode: false,
+      },
+      'image/gif': {
+        ext: ['gif'],
+        transcode: false,
+      },
+      'image/png': {
+        ext: ['png'],
+        transcode: false,
+      },
+      'image/bmp': {
+        ext: ['bmp'],
+        transcode: 'jpeg',
+      },
+      'image/heif': {
+        ext: ['heif', 'heic'],
+        transcode: 'jpeg',
+      },
+      'image/heif-sequence': {
+        ext: ['heif', 'heic'],
+        transcode: 'jpeg',
+      },
+      'image/heic': {
+        ext: ['heif', 'heic'],
+        transcode: 'jpeg',
+      },
+      'image/heic-sequence': {
+        ext: ['heif', 'heic'],
+        transcode: 'jpeg',
+      },
+      'image/tiff': {
+        ext: ['tif'],
+        transcode: 'jpeg',
+      },
+      'image/tiff-fx': {
+        ext: ['tif'],
+        transcode: 'jpeg',
+      },
+      'image/x-portable-pixmap': {
+        ext: ['ppm'],
+        transcode: 'jpeg',
+      },
+      'image/x-sony-arw': {
+        ext: ['arw'],
+        transcode: 'jpeg',
+      }, // (Sony)
+      'image/x-sony-sr2': {
+        ext: ['sr2'],
+        transcode: 'jpeg',
+      }, // (Sony)
+      'image/x-canon-crw': {
+        ext: ['crw'],
+        transcode: 'jpeg',
+      }, // (Canon)
+      'image/x-canon-cr2': {
+        ext: ['crw'],
+        transcode: 'jpeg',
+      }, // (Canon)
+      'image/x-kodak-dcr': {
+        ext: ['dcr'],
+        transcode: 'jpeg',
+      }, // (Kodak)
+      'image/x-adobe-dng': {
+        ext: ['dng'],
+        transcode: 'jpeg',
+      }, // (Adobe)
+      'image/x-minolta-mrw': {
+        ext: ['mrw'],
+        transcode: 'jpeg',
+      }, // (Minolta, Konica Minolta)
+      'image/x-nikon-nef': {
+        ext: ['nef'],
+        transcode: 'jpeg',
+      }, // (Nikon)
+      'image/x-olympus-orf': {
+        ext: ['orf'],
+        transcode: 'jpeg',
+      }, // (Olympus)
+      'image/x-pentax-pef': {
+        ext: ['pef'],
+        transcode: 'jpeg',
+      }, // (Pentax)
+      'image/x-fuji-raf': {
+        ext: ['raf'],
+        transcode: 'jpeg',
+      }, // (Fuji)
+      'image/x-sigma-x3f': {
+        ext: ['x3f'],
+        transcode: 'jpeg',
+      }, // (Sigma)
+    },
+  },
 };
+
+const supportedFormats = () => JSON.parse(JSON.stringify(SUPPORTED_FORMAT));
+
+const mimeTypesForExt = (extension, map) => Object.keys(map)
+  .filter((mime) => map[mime].ext.includes((extension || '').toLowerCase()));
+
+const isVideo = (mime, extension) => SUPPORTED_FORMAT.VIDEO.MIME.includes(mime)
+  || !!SUPPORTED_FORMAT.VIDEO.EXT[(extension || '').toLowerCase()];
+
+const isImage = (mime, extension) => !!SUPPORTED_FORMAT.IMAGE.MIME[mime]
+  || mimeTypesForExt(extension, SUPPORTED_FORMAT.IMAGE.MIME).length > 0;
+
+const isSubtitle = (extension) => !!SUPPORTED_FORMAT.SUBTITLE.EXT[(extension || '').toLowerCase()];
+
+const isSupported = (size, mime, ext) => size > 0 && (isVideo(mime, ext) || isImage(mime, ext) || isSubtitle(ext));
 
 const humanReadableTimeCode = (miliseconds, options = {}) => {
   if (!Number.isFinite(miliseconds)) {
@@ -71,9 +219,6 @@ const parseMime = (mime) => {
   };
 };
 
-const mime2Ext = (extOrMime) => EXT_MIME[extOrMime];
-const ext2Mime = mime2Ext;
-
 export {
-  humanReadableTimeCode, parseMime, mime2Ext, ext2Mime,
+  supportedFormats, isVideo, isImage, isSubtitle, isSupported, humanReadableTimeCode, parseMime,
 };
