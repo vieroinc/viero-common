@@ -1,6 +1,6 @@
 {
   "name": "@viero/common",
-  "version": "1.5.7",
+  "version": "1.6.0",
   "description": "Common code used by other @vieroinc libraries.",
   "homepage": "https://github.com/vieroinc/viero-common",
   "contributors": [
@@ -21,12 +21,13 @@
     "build": "npm run lint && npm run clean && babel src -d ./dist --source-maps inline",
     "dist": "npm run build && copyfiles package.json README.md LICENSE.md dist",
     "test": "npm run dist && mocha",
-    "npmjs": "npm run test && npm publish ./dist --access public"
+    "npmjs": "npm run dist && npm publish ./dist --access public"
   },
   "module": "./index.js",
   "dependencies": {
     "chai": "^4.2.0",
-    "mocha": "^8.0.1",
+    "filesize": "^6.1.0",
+    "mocha": "^8.1.1",
     "shortid": "^2.2.15",
     "uuid": "^8.1.0"
   },

@@ -15,5 +15,9 @@
  */
 
 export { VieroError } from './error';
+export { merge } from './limit';
 export { VieroLog } from './log';
+export {
+  supportedFormats, isVideo, isImage, isSubtitle, isSupported, parseMime,
+} from './media';
 export { uuid, longUId, shortUId } from './uid';
