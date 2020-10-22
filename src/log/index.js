@@ -119,31 +119,31 @@ class VieroLog {
 
   trace(...args) {
     if (this.isTrace()) {
-      this.BACKEND.trace(time(), this._domain, ...args);
+      this.BACKEND.trace(time(), 'T', this._domain, ...args);
     }
   }
 
   debug(...args) {
     if (this.isDebug()) {
-      this.BACKEND.debug(time(), this._domain, ...args);
+      this.BACKEND.debug(time(), 'D', this._domain, ...args);
     }
   }
 
   info(...args) {
     if (this.isInfo()) {
-      this.BACKEND.info(time(), this._domain, ...args);
+      this.BACKEND.info(time(), 'I', this._domain, ...args);
     }
   }
 
   warning(...args) {
     if (this.isWarning()) {
-      this.BACKEND.warning(time(), this._domain, ...args);
+      this.BACKEND.warning(time(), 'W', this._domain, ...args);
     }
   }
 
   error(...args) {
     if (this.isError()) {
-      this.BACKEND.error(time(), this._domain, ...args);
+      this.BACKEND.error(time(), 'E', this._domain, ...args);
     }
   }
 }
