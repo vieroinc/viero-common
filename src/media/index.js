@@ -177,19 +177,6 @@ const isSubtitle = (extension) => !!SUPPORTED_FORMAT.SUBTITLE.EXT[(extension || 
 
 const isSupported = (size, mime, ext) => size > 0 && (isVideo(mime, ext) || isImage(mime, ext) || isSubtitle(ext));
 
-const parseMime = (mime) => {
-  const split = mime.split(';');
-  const type = split[0];
-  const typeSplit = type.split('/');
-  if (split.length === 1) {
-    return { type, major: typeSplit[0].trim(), minor: typeSplit[1].trim() };
-  }
-  const codecsSplit = split[1].slice(7).split(',');
-  return {
-    type, major: typeSplit[0], minor: typeSplit[1], codecs: codecsSplit,
-  };
-};
-
 export {
-  supportedFormats, isVideo, isImage, isSubtitle, isSupported, parseMime,
+  supportedFormats, isVideo, isImage, isSubtitle, isSupported,
 };

@@ -14,11 +14,6 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-export { VieroError } from './error';
-export { merge } from './limit';
-export { VieroLog } from './log';
-export {
-  supportedFormats, isVideo, isImage, isSubtitle, isSupported,
-} from './media';
-export { uuid, longUId, shortUId } from './uid';
-export { parseMime } from './mime';
+import { parse as parseMime } from 'whatwg-mimetype';
+
+export { parseMime };
