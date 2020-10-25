@@ -14,6 +14,8 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-import { parse as parseMime } from 'whatwg-mimetype';
+import MIMEType from 'whatwg-mimetype';
+
+const parseMime = (string) => new MIMEType(string);
 
 export { parseMime };

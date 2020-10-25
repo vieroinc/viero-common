@@ -1,6 +1,6 @@
 {
   "name": "@viero/common",
-  "version": "1.6.4",
+  "version": "1.6.5",
   "description": "Common code used by other @vieroinc libraries.",
   "homepage": "https://github.com/vieroinc/viero-common",
   "contributors": [
